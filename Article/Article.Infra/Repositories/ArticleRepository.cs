@@ -78,5 +78,31 @@ namespace Article.Infra.Repositories
 
             return rows > 0;
         }
+
+        public async ValueTask<bool> DeleteArticle(DeleteArticleCommand article)
+        {
+            int rows = 0;
+
+            using (var transaction = _context.Connection.BeginTransaction())
+            {
+                try
+                {
+                    string query = @" DELETE FROM Articles  WHERE Article_ID = @article_ID ";
+
+                    rows = await _context.Connection.ExecuteAsync(query,
+                          article, transaction);
+
+                    transaction.Commit();
+                }
+
+                catch
+                {
+                    transaction.Rollback();
+                    throw;
+                }
+            }
+
+            return rows > 0;
+        }
     }
 }

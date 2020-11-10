@@ -11,5 +11,6 @@ namespace Article.Domain.Repositories
         ValueTask<ArticleQuery> GetArticle(Guid article_ID);
         ValueTask<bool> RegisterArticle(Articles article);
         ValueTask<bool> UpdateArticle(UpdateArticleCommand article);
+        ValueTask<bool> DeleteArticle(DeleteArticleCommand article);
     }
 }

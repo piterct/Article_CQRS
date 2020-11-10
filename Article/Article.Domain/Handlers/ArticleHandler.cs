@@ -62,5 +62,20 @@ namespace Article.Domain.Handlers
                 return new GenericCommandResult(updated, "Internal Error!", null, StatusCodes.Status500InternalServerError, null);
             }
         }
+
+        public async ValueTask<ICommandResult> Handle(DeleteArticleCommand command)
+        {
+            command.Validate();
+            if (command.Invalid)
+                return new GenericCommandResult(false, "Incorrect  data!", null, StatusCodes.Status400BadRequest, command.Notifications);
+
+            bool deleted = await _repository.DeleteArticle(command);
+
+            if (deleted)
+                return new GenericCommandResult(true, "Article Deleted!", null, StatusCodes.Status200OK, null);
+
+
+            return new GenericCommandResult(deleted, "Internal Error!", null, StatusCodes.Status500InternalServerError, null);
+        }
     }
 }
