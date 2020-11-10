@@ -1,0 +1,54 @@
+﻿using Article.Domain.Entities;
+using Article.Domain.Queries;
+using Article.Domain.Repositories;
+using Article.Infra.DataContext;
+using Dapper;
+using System;
+using System.Threading.Tasks;
+
+namespace Article.Infra.Repositories
+{
+    public class LikeRepository : ILikeRepository
+    {
+        private readonly ArticleDataContext _context;
+        public LikeRepository(ArticleDataContext context)
+        {
+            _context = context;
+        }
+
+        public async ValueTask<GetQuantityLikeQuery> GetQuantityLikesByArticle(Guid article_ID)
+        {
+            string query = @" SELECT DISTINCT COUNT(Liked) QuantityLikes FROM Likes                              
+                               WHERE liked = 1 and Article_ID = @article_ID ";
+
+            return await _context.Connection.QuerySingleOrDefaultAsync<GetQuantityLikeQuery>(query,
+                  new { Article_ID = article_ID });
+        }
+
+        public async ValueTask<bool> RegisterLike(Like like)
+        {
+            int rows = 0;
+
+            using (var transaction = _context.Connection.BeginTransaction())
+            {
+                try
+                {
+                    string query = @" INSERT INTO Likes VALUES (@like_ID,@liked,@user_ID,@article_ID) ";
+
+                    rows = await _context.Connection.ExecuteAsync(query,
+                          like, transaction);
+
+                    transaction.Commit();
+                }
+
+                catch
+                {
+                    transaction.Rollback();
+                    throw;
+                }
+            }
+
+            return rows > 0;
+        }
+    }
+}
