@@ -63,5 +63,25 @@ namespace Article.Api.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
+
+        [HttpDelete]
+        [AllowAnonymous]
+        [Route("deleteLike")]
+        public async ValueTask<IActionResult> Delete([FromBody] DeleteLikeCommand command, [FromServices] LikeHandler handler)
+        {
+            try
+            {
+                var result = await handler.Handle(command);
+
+                return GetResult((GenericCommandResult)result);
+            }
+            catch (Exception exception)
+            {
+                _logger.LogError("An exception has occurred at {dateTime}. " +
+                 "Exception message: {message}." +
+                 "Exception Trace: {trace}", DateTime.UtcNow, exception.Message, exception.StackTrace);
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+        }
     }
 }

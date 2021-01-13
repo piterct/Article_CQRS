@@ -1,4 +1,6 @@
-﻿using Article.Domain.Entities;
+﻿using Article.Domain.Commands.Like;
+using Article.Domain.Commands.User;
+using Article.Domain.Entities;
 using Article.Domain.Queries;
 using Article.Domain.Repositories;
 using Article.Infra.DataContext;
@@ -37,6 +39,32 @@ namespace Article.Infra.Repositories
 
                     rows = await _context.Connection.ExecuteAsync(query,
                           like, transaction);
+
+                    transaction.Commit();
+                }
+
+                catch
+                {
+                    transaction.Rollback();
+                    throw;
+                }
+            }
+
+            return rows > 0;
+        }
+
+        public async ValueTask<bool> DeleteLike(DeleteLikeCommand deleteCommandLike)
+        {
+            int rows = 0;
+
+            using (var transaction = _context.Connection.BeginTransaction())
+            {
+                try
+                {
+                    string query = @" DELETE FROM Likes  WHERE User_ID = @user_ID  and Article_ID = @article_ID";
+
+                    rows = await _context.Connection.ExecuteAsync(query,
+                          deleteCommandLike, transaction);
 
                     transaction.Commit();
                 }

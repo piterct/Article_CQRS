@@ -11,7 +11,8 @@ using System.Threading.Tasks;
 namespace Article.Domain.Handlers
 {
     public class LikeHandler : Notifiable,
-     ICommandHandler<AddLikeArticleCommand>
+     ICommandHandler<AddLikeArticleCommand>,
+        ICommandHandler<DeleteLikeCommand>
     {
 
         private readonly ILikeRepository _repository;
@@ -34,6 +35,20 @@ namespace Article.Domain.Handlers
             if (done)
                 return new GenericCommandResult(true, "Like Registered!", like, StatusCodes.Status201Created, null);
 
+
+            return new GenericCommandResult(done, "Internal Error!", null, StatusCodes.Status500InternalServerError, null);
+        }
+
+        public async ValueTask<ICommandResult> Handle(DeleteLikeCommand command)
+        {
+            command.Validate();
+            if (command.Invalid)
+                return new GenericCommandResult(false, "Incorrect  data!", null, StatusCodes.Status400BadRequest, command.Notifications);
+
+            var done = await _repository.DeleteLike(command);
+
+            if (done)
+                return new GenericCommandResult(true, "Like deleted!", null, StatusCodes.Status200OK, null);
 
             return new GenericCommandResult(done, "Internal Error!", null, StatusCodes.Status500InternalServerError, null);
         }
