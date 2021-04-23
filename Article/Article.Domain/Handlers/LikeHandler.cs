@@ -10,9 +10,8 @@ using System.Threading.Tasks;
 
 namespace Article.Domain.Handlers
 {
-    public class LikeHandler : Notifiable,
-     ICommandHandler<AddLikeArticleCommand>,
-        ICommandHandler<DeleteLikeCommand>
+    public class LikeHandler : Notifiable
+
     {
 
         private readonly ILikeRepository _repository;

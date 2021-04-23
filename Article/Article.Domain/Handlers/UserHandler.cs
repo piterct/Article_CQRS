@@ -9,10 +9,7 @@ using System.Threading.Tasks;
 
 namespace Article.Domain.Handlers
 {
-    public class UserHandler : Notifiable,
-        ICommandHandler<CreateUserCommand>,
-         ICommandHandler<UpdateUserCommand>,
-        ICommandHandler<DeleteUserCommand>
+    public class UserHandler : Notifiable
     {
         private readonly IUserRepository _repository;
 
@@ -70,8 +67,8 @@ namespace Article.Domain.Handlers
 
             bool deleted = await _repository.DeleteUser(command);
 
-            if(deleted)
-            return new GenericCommandResult(true, "User Deleted!", null, StatusCodes.Status200OK, null);
+            if (deleted)
+                return new GenericCommandResult(true, "User Deleted!", null, StatusCodes.Status200OK, null);
 
 
             return new GenericCommandResult(deleted, "Internal Error!", null, StatusCodes.Status500InternalServerError, null);

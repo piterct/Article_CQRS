@@ -9,9 +9,7 @@ using System.Threading.Tasks;
 
 namespace Article.Domain.Handlers
 {
-    public class ArticleHandler : Notifiable,
-     ICommandHandler<CreateArticleCommand>,
-          ICommandHandler<UpdateArticleCommand>
+    public class ArticleHandler : Notifiable
     {
         private readonly IArticleRepository _repository;
 
