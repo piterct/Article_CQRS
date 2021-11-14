@@ -25,7 +25,7 @@ namespace Article.Api.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-        [Route("quantityLikesByArticle")]
+        [Route("quantityLikesByArticle/{article_ID}")]
         [ResponseCache(Duration = 300)]
         public async ValueTask<IActionResult> GetQuantityLikesByArticle(Guid article_ID)
         {
