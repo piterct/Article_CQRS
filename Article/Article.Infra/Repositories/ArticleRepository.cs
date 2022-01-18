@@ -5,6 +5,7 @@ using Article.Domain.Repositories;
 using Article.Infra.DataContext;
 using Dapper;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Article.Infra.Repositories
@@ -25,6 +26,14 @@ namespace Article.Infra.Repositories
             return await _context.Connection.QuerySingleOrDefaultAsync<ArticleQuery>(query,
                   new { Article_ID = article_ID });
 
+        }
+
+        public async ValueTask<IEnumerable<ArticleQuery>> GetAllArticles()
+        {
+            string query = @" SELECT * FROM Articles";
+
+            return await _context.Connection.QueryAsync<ArticleQuery>(query,
+                  new { });
         }
 
         public async ValueTask<bool> RegisterArticle(Articles article)

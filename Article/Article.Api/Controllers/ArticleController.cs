@@ -47,6 +47,26 @@ namespace Article.Api.Controllers
             }
         }
 
+        [HttpGet]
+        [AllowAnonymous]
+        [Route("allArticles")]
+        public async ValueTask<IActionResult> GetAllArticles()
+        {
+            try
+            {
+                var articles = await _articleRepository.GetAllArticles();
+
+                return GetResult(new GenericCommandResult(true, "Success", articles, StatusCodes.Status200OK, null));
+            }
+            catch (Exception exception)
+            {
+                _logger.LogError("An exception has occurred at {dateTime}. " +
+                 "Exception message: {message}." +
+                 "Exception Trace: {trace}", DateTime.UtcNow, exception.Message, exception.StackTrace);
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+        }
+
 
         [HttpPost]
         [AllowAnonymous]
