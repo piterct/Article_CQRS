@@ -44,6 +44,26 @@ namespace Article.Api.Controllers
             }
         }
 
+        [HttpGet]
+        [AllowAnonymous]
+        [Route("allLikes")]
+        public async ValueTask<IActionResult> GetAllArticles()
+        {
+            try
+            {
+                var likes = await _likeRepository.GetAllLikes();
+
+                return GetResult(new GenericCommandResult(true, "Success", likes, StatusCodes.Status200OK, null));
+            }
+            catch (Exception exception)
+            {
+                _logger.LogError("An exception has occurred at {dateTime}. " +
+                 "Exception message: {message}." +
+                 "Exception Trace: {trace}", DateTime.UtcNow, exception.Message, exception.StackTrace);
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+        }
+
         [HttpPost]
         [AllowAnonymous]
         [Route("registerLike")]

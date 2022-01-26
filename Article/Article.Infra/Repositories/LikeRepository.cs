@@ -2,10 +2,12 @@
 using Article.Domain.Commands.User;
 using Article.Domain.Entities;
 using Article.Domain.Queries;
+using Article.Domain.Queries.Like;
 using Article.Domain.Repositories;
 using Article.Infra.DataContext;
 using Dapper;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Article.Infra.Repositories
@@ -25,6 +27,15 @@ namespace Article.Infra.Repositories
 
             return await _context.Connection.QuerySingleOrDefaultAsync<GetQuantityLikeQuery>(query,
                   new { Article_ID = article_ID });
+        }
+
+
+        public async ValueTask<IEnumerable<LikesQuery>> GetAllLikes()
+        {
+            string query = @" SELECT * FROM Likes";
+
+            return await _context.Connection.QueryAsync<LikesQuery>(query,
+                  new { });
         }
 
         public async ValueTask<bool> RegisterLike(Like like)
