@@ -70,7 +70,7 @@ namespace Article.Infra.Repositories
             {
                 try
                 {
-                    string query = @" UPDATE Articles SET Name = @Name  WHERE Article_ID = @article_ID   ";
+                    string query = @" UPDATE Articles  SET Name = @Name  WHERE Article_ID = @article_ID   ";
 
                     rows = await _context.Connection.ExecuteAsync(query,
                           article, transaction);
