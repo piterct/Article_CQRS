@@ -54,7 +54,7 @@ namespace Article.Domain.Handlers
                 bool updated = await _repository.UpdateArticle(command);
 
                 if (updated)
-                    return new GenericCommandResult(true, "Article Updated!", article, StatusCodes.Status200OK, null);
+                    return new GenericCommandResult(true, "Updated Article !", article, StatusCodes.Status200OK, null);
 
 
                 return new GenericCommandResult(updated, "Internal Server Error!", null, StatusCodes.Status500InternalServerError, null);
