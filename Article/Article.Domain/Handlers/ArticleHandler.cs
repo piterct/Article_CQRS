@@ -70,7 +70,7 @@ namespace Article.Domain.Handlers
             bool deleted = await _repository.DeleteArticle(command);
 
             if (deleted)
-                return new GenericCommandResult(true, "Article Deleted!", null, StatusCodes.Status200OK, null);
+                return new GenericCommandResult(true, "Deleted Article!", null, StatusCodes.Status200OK, null);
 
 
             return new GenericCommandResult(deleted, "Internal Error!", null, StatusCodes.Status500InternalServerError, null);
