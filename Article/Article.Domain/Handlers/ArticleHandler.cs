@@ -57,7 +57,7 @@ namespace Article.Domain.Handlers
                     return new GenericCommandResult(true, "Article Updated!", article, StatusCodes.Status200OK, null);
 
 
-                return new GenericCommandResult(updated, "Internal Error!", null, StatusCodes.Status500InternalServerError, null);
+                return new GenericCommandResult(updated, "Internal Server Error!", null, StatusCodes.Status500InternalServerError, null);
             }
         }
 
