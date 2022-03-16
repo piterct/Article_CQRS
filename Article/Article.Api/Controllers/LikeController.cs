@@ -53,7 +53,7 @@ namespace Article.Api.Controllers
             {
                 var likes = await _likeRepository.GetAllLikes();
 
-                return GetResult(new GenericCommandResult(true, "Success", likes, StatusCodes.Status200OK, null));
+                return GetResult(new GenericCommandResult(true, "Success !", likes, StatusCodes.Status200OK, null));
             }
             catch (Exception exception)
             {
