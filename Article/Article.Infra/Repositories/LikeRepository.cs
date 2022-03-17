@@ -1,5 +1,4 @@
 ﻿using Article.Domain.Commands.Like;
-using Article.Domain.Commands.User;
 using Article.Domain.Entities;
 using Article.Domain.Queries;
 using Article.Domain.Queries.Like;
