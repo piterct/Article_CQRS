@@ -115,11 +115,11 @@ namespace Article.Api.Controllers
         [HttpDelete]
         [AllowAnonymous]
         [Route("deleteArticle")]
-        public async ValueTask<IActionResult> Delete([FromBody] DeleteArticleCommand command, [FromServices] ArticleHandler handler)
+        public async ValueTask<IActionResult> Delete([FromBody] DeleteArticleCommand command)
         {
             try
             {
-                var result = await handler.Handle(command);
+                var result = await _articleHandler.Handle(command);
 
                 return GetResult((GenericCommandResult)result);
             }
