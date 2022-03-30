@@ -7,5 +7,6 @@ namespace Article.Domain.Handlers.Interfaces
     public  interface IArticleHandler
     {
         ValueTask<ICommandResult> Handle(CreateArticleCommand command);
+        ValueTask<ICommandResult> Handle(UpdateArticleCommand command);
     }
 }
