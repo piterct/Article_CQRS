@@ -92,14 +92,14 @@ namespace Article.Api.Controllers
         }
 
 
-        [HttpPatch]
+        [HttpPut]
         [AllowAnonymous]
         [Route("updateArticle")]
-        public async ValueTask<IActionResult> Patch([FromBody] UpdateArticleCommand command, [FromServices] ArticleHandler handler)
+        public async ValueTask<IActionResult> Put([FromBody] UpdateArticleCommand command)
         {
             try
             {
-                var result = await handler.Handle(command);
+                var result = await _articleHandler.Handle(command);
 
                 return GetResult((GenericCommandResult)result);
             }
