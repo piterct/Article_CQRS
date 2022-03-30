@@ -8,5 +8,6 @@ namespace Article.Domain.Handlers.Interfaces
     {
         ValueTask<ICommandResult> Handle(CreateArticleCommand command);
         ValueTask<ICommandResult> Handle(UpdateArticleCommand command);
+        ValueTask<ICommandResult> Handle(DeleteArticleCommand command);
     }
 }
