@@ -20,7 +20,9 @@ namespace Article.Api.Controllers
         private readonly IArticleRepository _articleRepository;
         private readonly IArticleHandler _articleHandler;
 
-        public ArticleController(ILogger<ArticleController> logger, IArticleRepository articleRepository, IArticleHandler articleHandler)
+        public ArticleController(ILogger<ArticleController> logger,
+            IArticleRepository articleRepository,
+            IArticleHandler articleHandler)
         {
             _logger = logger;
             _articleRepository = articleRepository;
