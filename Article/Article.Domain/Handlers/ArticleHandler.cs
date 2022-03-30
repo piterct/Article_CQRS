@@ -1,5 +1,6 @@
 ﻿using Article.Domain.Commands.Article;
 using Article.Domain.Entities;
+using Article.Domain.Handlers.Interfaces;
 using Article.Domain.Repositories;
 using Article.Shared.Commands;
 using Article.Shared.Commands.Contracts;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Article.Domain.Handlers
 {
-    public class ArticleHandler : Notifiable
+    public class ArticleHandler : Notifiable, IArticleHandler
     {
         private readonly IArticleRepository _repository;
 

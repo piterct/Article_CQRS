@@ -20,10 +20,11 @@ namespace Article.Api.Controllers
         private readonly IArticleRepository _articleRepository;
         private readonly IArticleHandler _articleHandler;
 
-        public ArticleController(ILogger<ArticleController> logger, IArticleRepository articleRepository)
+        public ArticleController(ILogger<ArticleController> logger, IArticleRepository articleRepository, IArticleHandler articleHandler)
         {
             _logger = logger;
             _articleRepository = articleRepository;
+            _articleHandler = articleHandler;
         }
 
         [HttpGet]
@@ -73,11 +74,11 @@ namespace Article.Api.Controllers
         [HttpPost]
         [AllowAnonymous]
         [Route("registerArticle")]
-        public async ValueTask<IActionResult> Post([FromBody] CreateArticleCommand command, [FromServices] ArticleHandler handler)
+        public async ValueTask<IActionResult> Post([FromBody] CreateArticleCommand command)
         {
             try
             {
-                var result = await handler.Handle(command);
+                var result = await _articleHandler.Handle(command);
 
                 return GetResult((GenericCommandResult)result);
             }

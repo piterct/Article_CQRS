@@ -1,4 +1,5 @@
 ﻿using Article.Domain.Handlers;
+using Article.Domain.Handlers.Interfaces;
 using Article.Domain.Repositories;
 using Article.Infra.DataContext;
 using Article.Infra.Repositories;
@@ -24,7 +25,7 @@ namespace Article.Api.Helpers.DependencyInjectionConfig
             #region Handlers
             services.AddTransient<UserHandler, UserHandler>();
             services.AddTransient<LikeHandler, LikeHandler>();
-            services.AddTransient<ArticleHandler, ArticleHandler>();
+            services.AddTransient<IArticleHandler, ArticleHandler>();
             #endregion
 
             #region Repositories
