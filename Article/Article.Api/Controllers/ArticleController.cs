@@ -1,5 +1,6 @@
 ﻿using Article.Domain.Commands.Article;
 using Article.Domain.Handlers;
+using Article.Domain.Handlers.Interfaces;
 using Article.Domain.Repositories;
 using Article.Shared.Commands;
 using Microsoft.AspNetCore.Authorization;
@@ -17,6 +18,7 @@ namespace Article.Api.Controllers
     {
         private readonly ILogger<ArticleController> _logger;
         private readonly IArticleRepository _articleRepository;
+        private readonly IArticleHandler _articleHandler;
 
         public ArticleController(ILogger<ArticleController> logger, IArticleRepository articleRepository)
         {
