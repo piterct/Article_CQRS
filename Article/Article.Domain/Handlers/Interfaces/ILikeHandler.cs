@@ -6,6 +6,6 @@ namespace Article.Domain.Handlers.Interfaces
 {
     public interface  ILikeHandler
     {
-        ValueTask<ICommandResult> Handle(AddLikeArticleCommand command)
+        ValueTask<ICommandResult> Handle(AddLikeArticleCommand command);
     }
 }
