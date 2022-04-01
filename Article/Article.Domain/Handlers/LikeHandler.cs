@@ -1,6 +1,7 @@
 ﻿using Article.Domain.Commands.Like;
 using Article.Domain.Entities;
 using Article.Domain.Enums;
+using Article.Domain.Handlers.Interfaces;
 using Article.Domain.Repositories;
 using Article.Shared.Commands;
 using Article.Shared.Commands.Contracts;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Article.Domain.Handlers
 {
-    public class LikeHandler : Notifiable
+    public class LikeHandler : Notifiable, ILikeHandler
 
     {
 
