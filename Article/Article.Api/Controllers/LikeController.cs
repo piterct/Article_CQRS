@@ -90,11 +90,11 @@ namespace Article.Api.Controllers
         [HttpDelete]
         [AllowAnonymous]
         [Route("deleteLike")]
-        public async ValueTask<IActionResult> Delete([FromBody] DeleteLikeCommand command, [FromServices] LikeHandler handler)
+        public async ValueTask<IActionResult> Delete([FromBody] DeleteLikeCommand command)
         {
             try
             {
-                var result = await handler.Handle(command);
+                var result = await _likeHandler.Handle(command);
 
                 return GetResult((GenericCommandResult)result);
             }
