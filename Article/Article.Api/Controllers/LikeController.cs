@@ -70,11 +70,11 @@ namespace Article.Api.Controllers
         [HttpPost]
         [AllowAnonymous]
         [Route("registerLike")]
-        public async ValueTask<IActionResult> Post([FromBody] AddLikeArticleCommand command, [FromServices] LikeHandler handler)
+        public async ValueTask<IActionResult> Post([FromBody] AddLikeArticleCommand command)
         {
             try
             {
-                var result = await handler.Handle(command);
+                var result = await _likeHandler.Handle(command);
 
                 return GetResult((GenericCommandResult)result);
             }
