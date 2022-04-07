@@ -1,5 +1,6 @@
 ﻿using Article.Domain.Commands.Like;
 using Article.Domain.Handlers;
+using Article.Domain.Handlers.Interfaces;
 using Article.Domain.Repositories;
 using Article.Shared.Commands;
 using Microsoft.AspNetCore.Authorization;
@@ -17,10 +18,12 @@ namespace Article.Api.Controllers
     {
         private readonly ILogger<LikeController> _logger;
         private readonly ILikeRepository _likeRepository;
-        public LikeController(ILogger<LikeController> logger, ILikeRepository likeRepository)
+        private readonly ILikeHandler _likeHandler;
+        public LikeController(ILogger<LikeController> logger, ILikeRepository likeRepository, ILikeHandler likeHandler)
         {
             _logger = logger;
             _likeRepository = likeRepository;
+            _likeHandler = likeHandler;
         }
 
         [HttpGet]
