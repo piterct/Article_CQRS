@@ -1,5 +1,6 @@
 ﻿using Article.Domain.Commands.User;
 using Article.Domain.Handlers;
+using Article.Domain.Handlers.Interfaces;
 using Article.Domain.Repositories;
 using Article.Shared.Commands;
 using Microsoft.AspNetCore.Authorization;
@@ -17,6 +18,7 @@ namespace Article.Api.Controllers
     {
         private readonly ILogger<UserController> _logger;
         private readonly IUserRepository _userRepository;
+        private readonly IUserHandler _userHandler;
 
         public UserController(ILogger<UserController> logger, IUserRepository userRepository)
         {
