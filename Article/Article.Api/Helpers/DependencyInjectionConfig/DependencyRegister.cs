@@ -30,9 +30,9 @@ namespace Article.Api.Helpers.DependencyInjectionConfig
             #endregion
 
             #region Repositories
-            services.AddTransient<IUserRepository, UserRepository>();
-            services.AddTransient<ILikeRepository, LikeRepository>();
-            services.AddTransient<IArticleRepository, ArticleRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<ILikeRepository, LikeRepository>();
+            services.AddScoped<IArticleRepository, ArticleRepository>();
 
             #endregion
         }
