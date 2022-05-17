@@ -23,10 +23,10 @@ namespace Article.Api.Helpers.DependencyInjectionConfig
             #endregion
 
             #region Handlers
-            services.AddTransient<UserHandler, UserHandler>();
-            services.AddTransient<ILikeHandler, LikeHandler>();
-            services.AddTransient<IArticleHandler, ArticleHandler>();
-            services.AddTransient<IUserHandler, UserHandler>();
+            services.AddScoped<UserHandler, UserHandler>();
+            services.AddScoped<ILikeHandler, LikeHandler>();
+            services.AddScoped<IArticleHandler, ArticleHandler>();
+            services.AddScoped<IUserHandler, UserHandler>();
             #endregion
 
             #region Repositories
